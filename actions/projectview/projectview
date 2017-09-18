@@ -65,7 +65,7 @@ for project in $PROJECTS ; do
     PROJECT_LIST=$(_list "$TODO_FILE" "+$project\b" "$@" | sed 's/\ *+[a-zA-Z0-9._\-]*\ */ /g')
     if [[ -n "${PROJECT_LIST}" ]]; then
         echo  "---  $project  ---"
-        echo  "${PROJECT_LIST}" | eval $TODOTXT_FINAL_FILTER 
+        echo  "${PROJECT_LIST}" | eval $TODOTXT_FINAL_FILTER | sort
         # If run as simplepv don't add newlines
         if [ $HOWRUN != "simplepv" ] ; then
             echo  ""
@@ -77,5 +77,5 @@ done
 PROJECT_LIST=$(_list "$TODO_FILE" "$@" | grep -v "+[[:alnum:]]*")
 if [[ -n "${PROJECT_LIST}" ]]; then
     echo "--- Not in projects ---"
-    echo "${PROJECT_LIST}" | eval $TODOTXT_FINAL_FILTER
+    echo "${PROJECT_LIST}" | eval $TODOTXT_FINAL_FILTER | sort
 fi
